@@ -7,7 +7,7 @@ namespace BetterACT5
 
     {
 
-        
+
         public Experiment5()
         {
             InitializeComponent();
@@ -138,6 +138,11 @@ namespace BetterACT5
         private void normal_Click(object sender, EventArgs e)
         {
             this.BackColor = Color.LightGray;
+        }
+
+        private void ageresult_Click(object sender, EventArgs e)
+        {
+
         }
     }
 
