@@ -4,7 +4,7 @@ from my subject software development
 
 created with @nhell
 
-## AGE CHECKER and BACKGROUND COLRO CHANGER   created with @nhell
+## AGE CHECKER and BACKGROUND COLRO CHANGER   created with ![Nhell](https://github.com/nhelll)
 When Runed
 ![Screenshot 2025-03-03 141556](https://github.com/user-attachments/assets/974f9550-0340-463e-b6f4-bf0e624dbbb2)
 
