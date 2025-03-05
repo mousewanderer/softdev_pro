@@ -50,6 +50,8 @@
             editToolStripMenuItemToolStripMenuItem1 = new ToolStripMenuItem();
             toolStripMenuItem2 = new ToolStripMenuItem();
             editToolStripMenuItemToolStripMenuItem2 = new ToolStripMenuItem();
+            textBox1 = new TextBox();
+            labelCounter = new Label();
             contextMenuListBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -203,14 +205,14 @@
             contextMenuListBox.ImageScalingSize = new Size(20, 20);
             contextMenuListBox.Items.AddRange(new ToolStripItem[] { toolStripMenuItem1, toolStripMenuItem2 });
             contextMenuListBox.Name = "contextMenuListBox";
-            contextMenuListBox.Size = new Size(211, 80);
+            contextMenuListBox.Size = new Size(133, 52);
             contextMenuListBox.Opening += contextMenuListBox_Opening;
             // 
             // toolStripMenuItem1
             // 
             toolStripMenuItem1.DropDownItems.AddRange(new ToolStripItem[] { editToolStripMenuItemToolStripMenuItem, editToolStripMenuItemToolStripMenuItem1 });
             toolStripMenuItem1.Name = "toolStripMenuItem1";
-            toolStripMenuItem1.Size = new Size(210, 24);
+            toolStripMenuItem1.Size = new Size(132, 24);
             toolStripMenuItem1.Text = "Remove";
             // 
             // editToolStripMenuItemToolStripMenuItem
@@ -231,7 +233,7 @@
             // 
             toolStripMenuItem2.DropDownItems.AddRange(new ToolStripItem[] { editToolStripMenuItemToolStripMenuItem2 });
             toolStripMenuItem2.Name = "toolStripMenuItem2";
-            toolStripMenuItem2.Size = new Size(210, 24);
+            toolStripMenuItem2.Size = new Size(132, 24);
             toolStripMenuItem2.Text = "Edit";
             // 
             // editToolStripMenuItemToolStripMenuItem2
@@ -241,12 +243,31 @@
             editToolStripMenuItemToolStripMenuItem2.Text = "editToolStripMenuItem";
             editToolStripMenuItemToolStripMenuItem2.Click += editToolStripMenuItemToolStripMenuItem1_Click;
             // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(171, 113);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(125, 27);
+            textBox1.TabIndex = 11;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
+            // labelCounter
+            // 
+            labelCounter.AutoSize = true;
+            labelCounter.Location = new Point(581, 403);
+            labelCounter.Name = "labelCounter";
+            labelCounter.Size = new Size(97, 20);
+            labelCounter.TabIndex = 12;
+            labelCounter.Text = "Total Items: 0";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Red;
             ClientSize = new Size(1100, 551);
+            Controls.Add(labelCounter);
+            Controls.Add(textBox1);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -292,5 +313,7 @@
         private ToolStripMenuItem toolStripMenuItem2;
         private ToolStripMenuItem editToolStripMenuItemToolStripMenuItem1;
         private ToolStripMenuItem editToolStripMenuItemToolStripMenuItem2;
+        private TextBox textBox1;
+        private Label labelCounter;
     }
 }

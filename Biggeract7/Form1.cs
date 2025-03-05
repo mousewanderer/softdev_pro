@@ -7,6 +7,14 @@ namespace Biggeract7
             InitializeComponent();
         }
 
+        private List<string> shoppingItems = new List<string>(); // Store all items
+
+
+        private void UpdateCounter()
+        {
+            labelCounter.Text = $"Total Items: {listBoxshopping.Items.Count}";
+        }
+
 
 
         private void comboboxcategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -23,10 +31,21 @@ namespace Biggeract7
 
 
             // Ensure the item is not empty
-            if (!string.IsNullOrWhiteSpace(textBoxitem.Text))
+            if (!string.IsNullOrWhiteSpace(textBoxitem.Text) && comboboxcategory.SelectedItem != null)
             {
+
+                string category = comboboxcategory.SelectedItem.ToString();
+                string item = textBoxitem.Text;
+                string formattedItem = $"{category}: {item}";
+
+
+                shoppingItems.Add(textBoxitem.Text); // Add to storage list
                 listBoxshopping.Items.Add(textBoxitem.Text); // Add the item to the ListBox
                 textBoxitem.Clear(); // Clear the TextBox after adding the item
+                UpdateCounter(); // Update item count
+
+
+
             }
             else if (listBoxshopping.Items.Contains(textBoxitem.Text))
             {
@@ -41,10 +60,11 @@ namespace Biggeract7
 
         private void buttonremove_Click(object sender, EventArgs e)
         {
-            // Check if any item is selected
             if (listBoxshopping.SelectedItem != null)
             {
-                listBoxshopping.Items.Remove(listBoxshopping.SelectedItem); // Remove the selected item
+                shoppingItems.Remove(listBoxshopping.SelectedItem.ToString()); // Remove from storage list
+                listBoxshopping.Items.Remove(listBoxshopping.SelectedItem); // Remove from ListBox
+                UpdateCounter(); // Update item count
             }
             else
             {
@@ -55,6 +75,8 @@ namespace Biggeract7
         private void buttonclear_Click(object sender, EventArgs e)
         {
             listBoxshopping.Items.Clear();
+            shoppingItems.Clear(); // Clear storage list
+            UpdateCounter(); // Update item count
         }
 
         private void savebutton_Click(object sender, EventArgs e)
@@ -100,6 +122,7 @@ namespace Biggeract7
             if (listBoxshopping.SelectedItem != null)
             {
                 listBoxshopping.Items.Remove(listBoxshopping.SelectedItem);
+                UpdateCounter(); // Update item count
             }
             else
             {
@@ -110,7 +133,7 @@ namespace Biggeract7
 
 
         // How to the fuck my edit turn to  editToolStripMenuItemToolStripMenuItem1_Click
-        
+
         private void editToolStripMenuItemToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
@@ -125,6 +148,7 @@ namespace Biggeract7
                 {
                     int selectedIndex = listBoxshopping.SelectedIndex;
                     listBoxshopping.Items[selectedIndex] = newItem;
+
                 }
             }
             else
@@ -132,6 +156,25 @@ namespace Biggeract7
                 MessageBox.Show("Please select an item to edit.", "Error");
             }
 
+
+        }
+
+        // text box 1 is the search
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            string searchText = textBox1.Text.ToLower();
+
+            // Filter list items based on category or item name
+            var filteredItems = shoppingItems
+                .Where(item => item.ToLower().Contains(searchText))
+                .ToList();
+
+            // Update ListBox with filtered results
+            listBoxshopping.Items.Clear();
+            listBoxshopping.Items.AddRange(filteredItems.ToArray());
+
+            UpdateCounter(); // Update item count after filtering
 
         }
     }
