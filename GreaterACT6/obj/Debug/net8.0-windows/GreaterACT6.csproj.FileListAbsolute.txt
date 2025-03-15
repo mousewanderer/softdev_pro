@@ -14,3 +14,6 @@ C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT
 C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\GreaterACT6.pdb
 C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\GreaterACT6.genruntimeconfig.cache
 C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\ref\GreaterACT6.dll
+C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\GreaterACT6.sourcelink.json
+C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\GreaterACT6.Form2.resources
+C:\Users\melwi\OneDrive\Desktop\Software Design\OH NOOOOO (ACT5-ACT6)\GreaterACT6\obj\Debug\net8.0-windows\GreaterACT6.Properties.Resources.resources

@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GreaterACT6")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e2adbfe527776a86c3231977fbb1831d98737ecb")]
 [assembly: System.Reflection.AssemblyProductAttribute("GreaterACT6")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GreaterACT6")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

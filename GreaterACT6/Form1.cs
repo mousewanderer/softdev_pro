@@ -1,24 +1,75 @@
+using System;
 using System.ComponentModel;
+using System.Data;
+using System.Drawing.Drawing2D;
 
 namespace GreaterACT6
 {
+
     public partial class Calculator : Form
     {
+
+
 
         double result = 0; // Stores the result of calculations
         string operation = ""; // Stores the current operation (e.g., +, -, *)
         bool isOperationPerformed = false; // Tracks if an operation was performed
 
         bool value0 = false;
-        bool dot_active = false;
+
         double baseNumber = 1;
 
         bool powerup = false;
 
+        bool isSqrtActive = false;
+        bool isLogActive = false;
+        bool isPowerActive = false;
+        string storedExpression = ""; // Stores the expression inside the function
+
+        bool isSinActive = false;
+        bool isCosActive = false;
+        bool isTanActive = false;
+        bool isLnActive = false;
+
+        // dot bug
+        bool isdotActive = false;
+
+        int count_dot = 0;
+
+        int allow_dot = 1;
+
+        bool negative = false;
+
+
+
+        bool operand = false;
+
+
+
+
+
+
+        // button 1 is the exit
+        private void button1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
         public Calculator()
         {
+
             InitializeComponent();
+            RoundButton myButton = new RoundButton
+            {
+                Text = "Click Me",
+                Width = 100,
+                Height = 100,
+                BackColor = Color.LightBlue,
+                FlatStyle = FlatStyle.Flat
+            };
+            this.Controls.Add(myButton);
         }
+
 
 
 
@@ -34,278 +85,407 @@ namespace GreaterACT6
 
         private void zero_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
-            value0 = true;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+            operand = false;
+
+
+            negative = true;
+
         }
 
         private void one_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+
+            operand = false;
+            negative = true;
         }
 
         private void two_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
         }
 
         private void three_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
         }
 
         private void four_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+
+            operand = false;
+            negative = true;
         }
 
         private void fiver_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
         }
 
         private void six_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
         }
 
         private void seven_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
         }
 
         private void eight_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+
+            operand = false;
+            negative = true;
         }
 
         private void nine_Click(object sender, EventArgs e)
         {
-            // If a calculation was just performed, clear the TextBox
-            if ((Viewbox.Text == "0") || (isOperationPerformed))
-                Viewbox.Clear();
-            isOperationPerformed = false;
-            // Append the button text to the TextBox
             Button button = (Button)sender;
-            Viewbox.Text += button.Text;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+            operand = false;
+            negative = true;
+
         }
 
         private void plus_Click(object sender, EventArgs e)
         {
-            dot_active = false;
             Button button = (Button)sender;
-            // If there's already a result, perform the previous operation
-            if (result != 0)
-            {
-                Equals.PerformClick();
-                operation = button.Text; // Set the new operation
-                isOperationPerformed = true;
-            }
-            else
-            {
-                operation = button.Text;
-                result = Double.Parse(Viewbox.Text);
-                isOperationPerformed = true;
-            }
+            string text = Viewbox.Text;
+
+            if (operand == true) return;
+
+            Viewbox.Text += " " + button.Text + " ";
+            allow_dot = 1;
+
+            operand = true;
+            negative = false;
+
         }
 
         private void minus_Click(object sender, EventArgs e)
         {
-            dot_active = false;
             Button button = (Button)sender;
-            // If there's already a result, perform the previous operation
-            if (result != 0)
-            {
-                Equals.PerformClick();
-                operation = button.Text; // Set the new operation
-                isOperationPerformed = true;
-            }
-            else
-            {
-                operation = button.Text;
-                result = Double.Parse(Viewbox.Text);
-                isOperationPerformed = true;
-            }
+            string text = Viewbox.Text;
+
+            if (operand == true) return;
+
+            Viewbox.Text += " " + button.Text + " ";
+            allow_dot = 1;
+
+            operand = true;
+            negative = false;
+
 
         }
 
 
         private void times_Click(object sender, EventArgs e)
         {
-            dot_active = false;
             Button button = (Button)sender;
-            // If there's already a result, perform the previous operation
-            if (result != 0)
-            {
-                Equals.PerformClick();
-                operation = button.Text; // Set the new operation
-                isOperationPerformed = true;
-            }
-            else
-            {
-                operation = button.Text;
-                result = Double.Parse(Viewbox.Text);
-                isOperationPerformed = true;
-            }
+            string text = Viewbox.Text;
+
+            // Prevent multiple operators in a row
+            if (operand == true) return;
+
+            Viewbox.Text += " " + button.Text + " ";
+            allow_dot = 1;
+
+            operand = true;
+            negative = false;
 
         }
 
         private void divide_Click(object sender, EventArgs e)
         {
-            dot_active = false;
             Button button = (Button)sender;
-            // If there's already a result, perform the previous operation
-            if (result != 0)
-            {
-                Equals.PerformClick();
-                operation = button.Text; // Set the new operation
-                isOperationPerformed = true;
-            }
-            else
-            {
-                operation = button.Text;
-                result = Double.Parse(Viewbox.Text);
+            string text = Viewbox.Text;
 
-                isOperationPerformed = true;
-            }
+            if (operand == true) return;
+
+            Viewbox.Text += " " + button.Text + " ";
+            allow_dot = 1;
+
+            operand = true;
+            negative = false;
+
         }
 
         private void equals_Click(object sender, EventArgs e)
         {
-
-            string result1 = "";
-            double secondNumber = Double.Parse(Viewbox.Text); // Get exponent (y)
-
-
-            switch (operation)
+            try
             {
+                string expression = Viewbox.Text;
+                string before_result = Viewbox.Text;
+
+                if (expression.Contains("/ 0") || (expression.Contains("/0")))
+                {
+                    MessageBox.Show("Division Error");
+                    Viewbox.Text = "";
+                    allow_dot = 1;
+                    operand = false;
+                    negative = false;
 
 
-                case "^": // Power operation
 
-                    if (powerup)
+                }
+
+                else
+                {
+                    if (expression.Contains("sin("))
+
                     {
-                        // If power mode is active, use the entered second number as the exponent
-                        result = Math.Pow(result, secondNumber);
-                        powerup = false;  // Reset the flag after computing the power
-                        Viewbox.Text = $"{result:n3}";
+                        expression = ProcessFunction(expression, "sin", x => Math.Sin(x * (Math.PI / 180))); // Convert to radians
+                    }
+                    if (expression.Contains("cos("))
+                    {
+                        expression = ProcessFunction(expression, "cos", x => Math.Cos(x * (Math.PI / 180)));
+                    }
+                    if (expression.Contains("tan("))
+                    {
+                        expression = ProcessFunction(expression, "tan", x =>
+                        {
+                            double radians = x * (Math.PI / 180);
+                            return Math.Cos(radians) == 0 ? double.NaN : Math.Tan(radians); // Avoid undefined tan(90), tan(270)
+                        });
+                    }
+                    if (expression.Contains("ln("))
+                    {
+                        expression = ProcessFunction(expression, "ln", Math.Log);
                     }
 
-                    break;
-                case "+":
-                    Viewbox.Text = $"{(result + Double.Parse(Viewbox.Text)).ToString():n3}";
-                    break;
-                case "-":
-                    Viewbox.Text = $"{(result - Double.Parse(Viewbox.Text)).ToString():n3}";
-                    break;
-                case "*":
-                    Viewbox.Text = $"{(result * Double.Parse(Viewbox.Text)).ToString():n3}";
-                    break;
-                case "/":
-                    if (Double.Parse(Viewbox.Text) != 0)
 
-                        Viewbox.Text = $"{(result / Double.Parse(Viewbox.Text)).ToString():n3}";
 
+                    if (expression.Contains("sqrt("))
+                    {
+                        expression = ProcessFunction(expression, "sqrt", Math.Sqrt);
+                    }
+                    if (expression.Contains("log("))
+                    {
+                        expression = ProcessFunction(expression, "log", Math.Log10);
+                    }
+                    if (expression.Contains("^"))
+                    {
+                        expression = ProcessPower(expression);
+                    }
+
+
+                    // Evaluate the final expression
+                    result = EvaluateExpression(expression);
+                    Viewbox.Text = $"{result}";
+
+                    // wait for the next operation for the result to be used
+
+                    UpdateHistory($"{before_result} = {result}");
+
+                    if (result.ToString().Contains('.'))
+                    {
+                        allow_dot = 0;
+                    }
                     else
                     {
-                        result1 = "";
-                        MessageBox.Show("Division Error: Cannot Divided by Zero");
+                        allow_dot = 1;
                     }
 
 
-                    break;
-                default:
-                    result = secondNumber;
-                    break;
+                    operand = false;
+                    negative = false;
+                }
             }
-            // format good
-            result1 = $"{Viewbox.Text:n3}";
-            result = Double.Parse(result1);
-
-            operation = "";
 
 
+
+
+            catch (Exception)
+            {
+                MessageBox.Show("Error (Invalid Input)");
+            }
         }
+
+        private void UpdateHistory(string entry)
+        {
+            const int maxEntries = 10; // Limit history to 10 calculations
+            string[] historyLines = HistoryText.Text.Split(new[] { "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            if (historyLines.Length >= maxEntries)
+            {
+                // Remove the oldest entry
+                HistoryText.Text = string.Join("\n", historyLines.Skip(1));
+            }
+
+            // Append new entry
+            HistoryText.Text += entry + "\n";
+        }
+
+
+
+        private string ProcessFunction(string expression, string function, Func<double, double> operation)
+        {
+            while (expression.Contains(function + "(")) // Process all instances
+            {
+                int startIndex = expression.LastIndexOf(function + "("); // Get last occurrence
+                int endIndex = expression.IndexOf(")", startIndex);
+
+                if (startIndex == -1 || endIndex == -1) return expression; // Prevent crash if improperly formatted
+
+                string inside = expression.Substring(startIndex + function.Length + 1, endIndex - startIndex - function.Length - 1);
+                double value = EvaluateExpression(inside);
+                double result = operation(value);
+
+                expression = expression.Substring(0, startIndex) + result.ToString() + expression.Substring(endIndex + 1);
+            }
+
+            return expression;
+        }
+
+        private string ProcessPower(string expression)
+        {
+            string[] parts = expression.Split('^');
+            if (parts.Length != 2) return expression; // Prevent errors
+
+            double baseNum = EvaluateExpression(parts[0]);
+            double exponent = EvaluateExpression(parts[1]);
+            double result = Math.Pow(baseNum, exponent);
+
+            return result.ToString();
+        }
+
+
+
 
         private void Clear_Click(object sender, EventArgs e)
         {
             Viewbox.Text = "0";
-            result = 0;
-            operation = "";
-            dot_active = false;
+            allow_dot = 1;
+            negative = false;
+            operand = false;
 
+        }
+
+        private double EvaluateExpression(string input)
+        {
+            DataTable dt = new DataTable();
+            return Convert.ToDouble(dt.Compute(input, ""));
 
         }
 
         private void dot_Click(object sender, EventArgs e)
         {
             // Check if the last entered number already contains a decimal point
-            if (!Viewbox.Text.Contains(".") || isOperationPerformed)
+            if (allow_dot == 1 || isOperationPerformed)
             {
                 if (isOperationPerformed)
                 {
                     // Reset the display when starting a new number
                     Viewbox.Text = "0";
                     isOperationPerformed = false;
+
                 }
 
                 // Append the decimal point
                 Button button = (Button)sender;
                 Viewbox.Text += button.Text;
-                dot_active = true; // Track that a decimal is in use
+
+                allow_dot--;
+            }
+        }
+
+        private void Calculator_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                equals_Click(sender, e);
             }
         }
 
@@ -319,139 +499,287 @@ namespace GreaterACT6
             string Text1 = Viewbox.Text;
             if (Text1.Length == 0)
             {
-                dot_active = false;
+                allow_dot = 1;
+                negative = false;
 
             }
             else if (Text1.Length == 1)
             {
-                Viewbox.Text = "0";
-                dot_active = false;
+                Viewbox.Text = "";
+                allow_dot = 1;
+                negative = false;
             }
             else
             {
+                char lastChar = Text1[Text1.Length - 1];
                 Viewbox.Text = Text1.Substring(0, Text1.Length - 1); // remove the last part (lets try)
-                if (!Viewbox.Text.Contains("."))
+                if (lastChar == '.' || lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
                 {
-                    dot_active = false;
+                    allow_dot = 1;
+                }
+
+                if (lastChar == '.' || lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/' && negative == true)
+                {
+                
+                    negative = false;
+                
+
                 }
             }
         }
 
         private void squareroot_Click(object sender, EventArgs e)
         {
-            double number = Double.Parse(Viewbox.Text);
-
-            if (number >= 0)
+            if (!string.IsNullOrEmpty(Viewbox.Text))
             {
-                result = Math.Sqrt(number);
-                Viewbox.Text = $"{result:n3}"; // Display formatted result
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1]; // Last character
+                char secondLastChar = Viewbox.Text.Length > 1 ? Viewbox.Text[Viewbox.Text.Length - 2] : ' '; // Avoid index error
+
+                if (lastChar == ' ' || secondLastChar == ' ')
+                {
+                    // If there's a space before sqrt, just append sqrt(
+                    Viewbox.Text += "sqrt(";
+                }
+                else if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
+                {
+                    Viewbox.Text += " sqrt("; // Keep spacing consistent
+                }
+                else if (secondLastChar == '+' || secondLastChar == '-' || secondLastChar == '*' || secondLastChar == '/')
+                {
+                    Viewbox.Text += "sqrt("; // If second last char is an operator, prevent extra space
+                }
+                else
+                {
+                    Viewbox.Text += "* sqrt("; // Multiply if there's an existing number
+                    allow_dot = 1;
+                }
             }
             else
             {
-                Viewbox.Text = "Error (Invalid Input)"; // Square root of negative number
+                Viewbox.Text = "sqrt("; // Allow sqrt() as the first input
             }
 
-            operation = ""; // Reset operation
+            isSqrtActive = true;
         }
 
-
+        //------------------------------------------------------------------------------------------
         private void power_Click(object sender, EventArgs e)
         {
-            dot_active = false;
-            Button button = (Button)sender;
-            // If there's already a result, perform the previous operation
-            if (result != 0)
+            if (!string.IsNullOrEmpty(Viewbox.Text))
             {
-                Equals.PerformClick();
-                operation = button.Text; // This should be "^"
-                isOperationPerformed = true;
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1];
+
+                if (char.IsDigit(lastChar) || lastChar == ')')
+                {
+                    Viewbox.Text += " ^ ";
+                }
             }
-            else
-            {
-                operation = button.Text;
-                result = Double.Parse(Viewbox.Text);
-                isOperationPerformed = true;
-            }
-            // Set the flag to capture the exponent on the next entry
-            powerup = true;
+
+            isPowerActive = true;
         }
 
+        //------------------------------------------------------------------------------------------
         private void naturallog_Click(object sender, EventArgs e)
         {
-            double number = Double.Parse(Viewbox.Text);
 
-            if (number > 0)
-            {
-                result = Math.Log(number); // Natural log (base e)
-                Viewbox.Text = $"{result:n3}"; // Display formatted result
-            }
-            else
-            {
-                Viewbox.Text = "Error (Invalid Input)"; // Log of zero or negative number is undefined
-            }
+            Button button = (Button)sender;
+            string text = Viewbox.Text;
 
-            operation = ""; // Reset operation
+            if (negative == true) return;
+
+            Viewbox.Text += " " + "-" + " ";
+
+
+            negative = true;
 
         }
 
+        //------------------------------------------------------------------------------------------
         private void logarithm_Click(object sender, EventArgs e)
         {
-            double number = Double.Parse(Viewbox.Text);
-
-            if (number > 0)
+            if (!string.IsNullOrEmpty(Viewbox.Text))
             {
-                result = Math.Log10(number);
-                Viewbox.Text = $"{result:n3}"; // Display formatted result
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1]; // Last character
+                char secondLastChar = Viewbox.Text.Length > 1 ? Viewbox.Text[Viewbox.Text.Length - 2] : ' '; // Avoid index error
+
+                if (lastChar == ' ')
+                {
+                    // If there's a space before log, just append log(
+                    Viewbox.Text += "log(";
+                }
+                else if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
+                {
+                    Viewbox.Text += " log("; // Keep spacing consistent
+                }
+                else if (secondLastChar == '+' || secondLastChar == '-' || secondLastChar == '*' || secondLastChar == '/')
+                {
+                    Viewbox.Text += "log("; // If second last char is an operator, prevent extra space
+                }
+                else
+                {
+
+                    Viewbox.Text += "* log("; // Multiply if there's an existing number
+                    allow_dot = 1;
+                }
             }
             else
             {
-                Viewbox.Text = "Error (Invalid Input)"; // Log of zero or negative number is undefined
+                Viewbox.Text = "log("; // Allow log() as the first input
             }
 
-            operation = ""; // Reset operation
-
+            isLogActive = true;
         }
-
+        //------------------------------------------------------------------------------------------
         private void Sinetrigo_Click(object sender, EventArgs e)
         {
-            double degrees = Double.Parse(Viewbox.Text);
-            double radians = degrees * (Math.PI / 180); // Convert to radians
+            if (!string.IsNullOrEmpty(Viewbox.Text))
+            {
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1];
 
-            result = Math.Sin(radians);
-            Viewbox.Text = $"{result:n6}"; // Display with 6 decimal places
+                if (char.IsDigit(lastChar) || lastChar == ')')
+                {
+                    Viewbox.Text += " * sin(";
+                    allow_dot = 1;
+                }
+                else if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
+                {
+                    Viewbox.Text += " sin(";
+                }
+                else
+                {
+                    Viewbox.Text += "sin(";
+                }
+            }
+            else
+            {
+                Viewbox.Text = "sin(";
+            }
 
-            operation = ""; // Reset operation
+            isSinActive = true;
         }
 
         private void cosinetrigo_Click(object sender, EventArgs e)
         {
-            double degrees = Double.Parse(Viewbox.Text);
-            double radians = degrees * (Math.PI / 180); // Convert to radians
-
-            result = Math.Cos(radians);
-            Viewbox.Text = $"{result:n6}";
-
-            operation = ""; // Reset operation
-
-        }
-
-        private void tangeanttrigo_Click(object sender, EventArgs e)
-        {
-            double degrees = Double.Parse(Viewbox.Text);
-            double radians = degrees * (Math.PI / 180); // Convert to radians
-
-            if (Math.Cos(radians) == 0) // Avoid undefined values (tan(90), tan(270), etc.)
+            if (!string.IsNullOrEmpty(Viewbox.Text))
             {
-                MessageBox.Show("Division Error: Cannot Divided by Zero");
-                Viewbox.Text = "";
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1];
+
+                if (char.IsDigit(lastChar) || lastChar == ')')
+                {
+                    Viewbox.Text += " * cos(";
+                    allow_dot = 1;
+                }
+                else if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
+                {
+                    Viewbox.Text += " cos(";
+                }
+                else
+                {
+                    Viewbox.Text += "cos(";
+                }
             }
             else
             {
-                result = Math.Tan(radians);
-                Viewbox.Text = $"{result:n6}";
+                Viewbox.Text = "cos(";
             }
 
-            operation = ""; // Reset operation
+            isCosActive = true;
+        }
+        private void tangeanttrigo_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(Viewbox.Text))
+            {
+                char lastChar = Viewbox.Text[Viewbox.Text.Length - 1];
+
+                if (char.IsDigit(lastChar) || lastChar == ')')
+                {
+                    Viewbox.Text += " * tan(";
+                    allow_dot = 1;
+                }
+                else if (lastChar == '+' || lastChar == '-' || lastChar == '*' || lastChar == '/')
+                {
+                    Viewbox.Text += " tan(";
+                }
+                else
+                {
+                    Viewbox.Text += "tan(";
+                }
+            }
+            else
+            {
+                Viewbox.Text = "tan(";
+            }
+
+            isTanActive = true;
+        }
+
+        private void open_parenthesis_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+        }
+
+        private void close_parenthesis_Click(object sender, EventArgs e)
+        {
+            Button button = (Button)sender;
+            string text = Viewbox.Text;
+
+            // Prevent leading zero issue
+            if (text == "0" && button.Text != ".")
+                Viewbox.Text = button.Text;
+            else
+                Viewbox.Text += button.Text;
+
+
+
+
+        }
+
+        // button 1 is the exit
+
+
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?",
+                                          "Exit Confirmation",
+                                          MessageBoxButtons.YesNo,
+                                          MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+        }
+
+        private void Shrink_Click(object sender, EventArgs e)
+        {
+
+            this.WindowState = FormWindowState.Minimized; // Minimize the calculator window
+        }
+
+        private void tab_Click(object sender, EventArgs e)
+        {
+            Form2 mainForm = new Form2();
+            this.Hide(); // Hide the login form
+            mainForm.ShowDialog();
+            this.Show(); // Show Form1 again when Form2 is closed
+        }
+
+        private void Viewbox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void HistoryText_Click(object sender, EventArgs e)
+        {
 
         }
     }
