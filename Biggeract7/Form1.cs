@@ -15,6 +15,25 @@ namespace Biggeract7
             labelCounter.Text = $"Total Items: {listBoxshopping.Items.Count}";
         }
 
+        /*Pastel & Soft (Friendly & Aesthetic)
+Background: Soft Beige (#FAF3E0)
+Primary Color: Pastel Green (#A8D5BA)
+Accent Color: Peach (#FFB6A2)
+Remove/Danger: Coral Red (#FF6B6B)
+Text: Deep Brown (#4E4E4E)
+        Shadows & Borders: Soft warm gray (#DDD2C0) for a subtle depth effect.
+        */
+
+
+
+        /*
+         * List Box Color Choices
+        Background: #FFF8F2 (Very light peach – keeps it warm and soft but distinct from the main background)
+        Border: #E5C3B6 (Muted peach – subtle but visible separation from the background)
+        Selected Item: #FFB6A2 (Peach – stands out while staying soft on the eyes)
+        Hovered Item: #FFD5C2 (Slightly lighter peach – provides feedback for interaction)
+        Text Color: #4E4E4E (Deep brown – consistent readability with other text elements)
+        */
 
 
         private void comboboxcategory_SelectedIndexChanged(object sender, EventArgs e)
@@ -34,23 +53,28 @@ namespace Biggeract7
             if (!string.IsNullOrWhiteSpace(textBoxitem.Text) && comboboxcategory.SelectedItem != null)
             {
 
-                string category = comboboxcategory.SelectedItem.ToString();
-                string item = textBoxitem.Text;
-                string formattedItem = $"{category}: {item}";
+                if (listBoxshopping.Items.Contains(textBoxitem.Text))
+                {
+                    MessageBox.Show("This item is already in the list.", "Duplicate Item");
+
+                }
+                else
+                {
+
+                    string category = comboboxcategory.SelectedItem.ToString();
+                    string item = textBoxitem.Text;
+                    string formattedItem = $"{category}: {item}";
 
 
-                shoppingItems.Add(textBoxitem.Text); // Add to storage list
-                listBoxshopping.Items.Add(textBoxitem.Text); // Add the item to the ListBox
-                textBoxitem.Clear(); // Clear the TextBox after adding the item
-                UpdateCounter(); // Update item count
+                    shoppingItems.Add(textBoxitem.Text); // Add to storage list
+                    listBoxshopping.Items.Add(textBoxitem.Text); // Add the item to the ListBox
+                    textBoxitem.Clear(); // Clear the TextBox after adding the item
+                    UpdateCounter(); // Update item count
 
-
+                }
 
             }
-            else if (listBoxshopping.Items.Contains(textBoxitem.Text))
-            {
-                MessageBox.Show("This item is already in the list.", "Duplicate Item");
-            }
+           
             else
             {
                 MessageBox.Show("Please enter an item to add to your shopping list.", "Error");
@@ -88,7 +112,7 @@ namespace Biggeract7
                     writer.WriteLine(item.ToString());
                 }
             }
-            MessageBox.Show("Shopping list saved to ShoppingList.txt");
+            MessageBox.Show("Shopping list saved to ShoppingList.txt which is found in the folder called debug");
         }
 
         private void Form1_Load_1(object sender, EventArgs e)
@@ -161,7 +185,14 @@ namespace Biggeract7
 
         // text box 1 is the search
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
             string searchText = textBox1.Text.ToLower();
 
@@ -176,6 +207,19 @@ namespace Biggeract7
 
             UpdateCounter(); // Update item count after filtering
 
+        }
+
+        private void exitbutton_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Are you sure you want to exit?",
+                                         "Exit Confirmation",
+                                         MessageBoxButtons.YesNo,
+                                         MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }
