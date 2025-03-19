@@ -46,6 +46,7 @@
             buttonadd = new Button();
             buttonremove = new Button();
             headpanel = new Panel();
+            LOADButton = new Button();
             button2 = new Button();
             exitbutton = new Button();
             listBoxshopping = new ListBox();
@@ -69,6 +70,7 @@
             // sidepanel
             // 
             sidepanel.BackColor = Color.FromArgb(255, 182, 162);
+            sidepanel.Controls.Add(LOADButton);
             sidepanel.Controls.Add(label2);
             sidepanel.Controls.Add(pictureBox4);
             sidepanel.Controls.Add(pictureBox3);
@@ -170,7 +172,7 @@
             savebutton.BackgroundImage = (Image)resources.GetObject("savebutton.BackgroundImage");
             savebutton.BackgroundImageLayout = ImageLayout.Zoom;
             savebutton.FlatStyle = FlatStyle.Flat;
-            savebutton.Location = new Point(159, 365);
+            savebutton.Location = new Point(137, 332);
             savebutton.Name = "savebutton";
             savebutton.Size = new Size(52, 43);
             savebutton.TabIndex = 7;
@@ -216,7 +218,7 @@
             buttonclear.BackgroundImageLayout = ImageLayout.Zoom;
             buttonclear.FlatStyle = FlatStyle.Popup;
             buttonclear.ImageAlign = ContentAlignment.TopCenter;
-            buttonclear.Location = new Point(230, 365);
+            buttonclear.Location = new Point(195, 332);
             buttonclear.Name = "buttonclear";
             buttonclear.Size = new Size(52, 43);
             buttonclear.TabIndex = 3;
@@ -231,7 +233,7 @@
             buttonadd.BackgroundImageLayout = ImageLayout.Zoom;
             buttonadd.FlatStyle = FlatStyle.Popup;
             buttonadd.ImageAlign = ContentAlignment.TopCenter;
-            buttonadd.Location = new Point(23, 365);
+            buttonadd.Location = new Point(21, 332);
             buttonadd.Name = "buttonadd";
             buttonadd.Size = new Size(52, 43);
             buttonadd.TabIndex = 2;
@@ -246,7 +248,7 @@
             buttonremove.BackgroundImageLayout = ImageLayout.Zoom;
             buttonremove.FlatStyle = FlatStyle.Popup;
             buttonremove.ImageAlign = ContentAlignment.TopCenter;
-            buttonremove.Location = new Point(90, 365);
+            buttonremove.Location = new Point(79, 332);
             buttonremove.Name = "buttonremove";
             buttonremove.Size = new Size(52, 43);
             buttonremove.TabIndex = 4;
@@ -265,6 +267,19 @@
             headpanel.Name = "headpanel";
             headpanel.Size = new Size(693, 75);
             headpanel.TabIndex = 1;
+            // 
+            // LOADButton
+            // 
+            LOADButton.BackColor = Color.FromArgb(255, 255, 128);
+            LOADButton.BackgroundImage = (Image)resources.GetObject("LOADButton.BackgroundImage");
+            LOADButton.BackgroundImageLayout = ImageLayout.Zoom;
+            LOADButton.FlatStyle = FlatStyle.Flat;
+            LOADButton.Location = new Point(253, 332);
+            LOADButton.Name = "LOADButton";
+            LOADButton.Size = new Size(52, 43);
+            LOADButton.TabIndex = 3;
+            LOADButton.UseVisualStyleBackColor = false;
+            LOADButton.Click += LOADButton_Click;
             // 
             // button2
             // 
@@ -430,5 +445,6 @@
         private PictureBox pictureBox4;
         private PictureBox pictureBox3;
         private Label label2;
+        private Button LOADButton;
     }
 }

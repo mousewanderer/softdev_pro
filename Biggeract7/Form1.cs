@@ -7,7 +7,32 @@ namespace Biggeract7
             InitializeComponent();
         }
 
+
+
         private List<string> shoppingItems = new List<string>(); // Store all items
+
+
+        private void Form1_Load_1(object sender, EventArgs e)
+
+        {
+            // Add categories to the ComboBox
+            comboboxcategory.Items.Add("Electronics");
+            comboboxcategory.Items.Add("Groceries");
+            comboboxcategory.Items.Add("Clothing");
+            comboboxcategory.Items.Add("Books");
+
+            listBoxshopping.ContextMenuStrip = contextMenuListBox;
+
+        }
+
+
+        private Dictionary<string, List<string>> categoryItems = new Dictionary<string, List<string>>()
+{
+    {"Electronics", new List<string>()},
+    {"Groceries", new List<string>()},
+    {"Clothing", new List<string>()},
+    {"Books", new List<string>()}
+};
 
 
         private void UpdateCounter()
@@ -35,98 +60,149 @@ Text: Deep Brown (#4E4E4E)
         Text Color: #4E4E4E (Deep brown – consistent readability with other text elements)
         */
 
-
+        //                           SELECTION _____________________________________________________________________
         private void comboboxcategory_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (comboboxcategory.SelectedItem == null) return;
+
             string selectedCategory = comboboxcategory.SelectedItem.ToString();
             MessageBox.Show($"You selected the category: {selectedCategory}", "Category Selected");
+
+            // Clear and load saved items for the selected category
+            listBoxshopping.Items.Clear();
+            if (categoryItems.ContainsKey(selectedCategory))
+            {
+                foreach (var item in categoryItems[selectedCategory])
+                {
+                    listBoxshopping.Items.Add(item);
+                }
+            }
+
+            UpdateCounter();
         }
 
+
+        // --------------------------------------------------------------------------  ADD
         private void buttonadd_Click(object sender, EventArgs e)
 
-
-
         {
-
-
-            // Ensure the item is not empty
-            if (!string.IsNullOrWhiteSpace(textBoxitem.Text) && comboboxcategory.SelectedItem != null)
+            if (string.IsNullOrWhiteSpace(textBoxitem.Text) || comboboxcategory.SelectedItem == null)
             {
-
-                if (listBoxshopping.Items.Contains(textBoxitem.Text))
-                {
-                    MessageBox.Show("This item is already in the list.", "Duplicate Item");
-
-                }
-                else
-                {
-
-                    string category = comboboxcategory.SelectedItem.ToString();
-                    string item = textBoxitem.Text;
-                    string formattedItem = $"{category}: {item}";
-
-
-                    shoppingItems.Add(textBoxitem.Text); // Add to storage list
-                    listBoxshopping.Items.Add(textBoxitem.Text); // Add the item to the ListBox
-                    textBoxitem.Clear(); // Clear the TextBox after adding the item
-                    UpdateCounter(); // Update item count
-
-                }
-
+                MessageBox.Show("Please select a category and enter an item.", "Error");
+                return;
             }
-           
-            else
+
+            string category = comboboxcategory.SelectedItem.ToString();
+            string item = textBoxitem.Text;
+
+            if (!categoryItems.ContainsKey(category))
             {
-                MessageBox.Show("Please enter an item to add to your shopping list.", "Error");
+                categoryItems[category] = new List<string>();
             }
+
+            if (categoryItems[category].Contains(item))
+            {
+                MessageBox.Show("This item is already in the list.", "Duplicate Item");
+                return;
+            }
+
+            // Add item to the correct category list
+            categoryItems[category].Add(item);
+
+            // Update the ListBox to show only the current category's items
+            listBoxshopping.Items.Clear();
+            listBoxshopping.Items.AddRange(categoryItems[category].ToArray());
+
+            textBoxitem.Clear(); // Clear input box after adding
+            UpdateCounter(); // Update item count
 
         }
-
+        // ----------------------------------------------- REMOVE
         private void buttonremove_Click(object sender, EventArgs e)
         {
-            if (listBoxshopping.SelectedItem != null)
+            if (comboboxcategory.SelectedItem == null)
             {
-                shoppingItems.Remove(listBoxshopping.SelectedItem.ToString()); // Remove from storage list
-                listBoxshopping.Items.Remove(listBoxshopping.SelectedItem); // Remove from ListBox
+                MessageBox.Show("Please select a category first.", "Error");
+                return;
+            }
+
+            if (listBoxshopping.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an item to remove.", "Error");
+                return;
+            }
+
+            string category = comboboxcategory.SelectedItem.ToString();
+            string selectedItem = listBoxshopping.SelectedItem.ToString();
+
+            // Ensure the category exists and remove the item from the list
+            if (categoryItems.ContainsKey(category) && categoryItems[category].Contains(selectedItem))
+            {
+                categoryItems[category].Remove(selectedItem);
+
+                // Refresh ListBox
+                listBoxshopping.Items.Clear();
+                listBoxshopping.Items.AddRange(categoryItems[category].ToArray());
+
                 UpdateCounter(); // Update item count
             }
             else
             {
-                MessageBox.Show("Please select an item to remove.", "Error");
+                MessageBox.Show("Item not found in the selected category.", "Error");
             }
         }
 
         private void buttonclear_Click(object sender, EventArgs e)
         {
-            listBoxshopping.Items.Clear();
-            shoppingItems.Clear(); // Clear storage list
-            UpdateCounter(); // Update item count
+            if (comboboxcategory.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a category first.", "Error");
+                return;
+            }
+
+            string category = comboboxcategory.SelectedItem.ToString();
+
+            // Confirm the action before clearing
+            DialogResult result = MessageBox.Show($"Are you sure you want to clear all items in {category}?",
+                                                  "Confirm Clear",
+                                                  MessageBoxButtons.YesNo,
+                                                  MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                // Clear only the items for the selected category
+                    categoryItems[category].Clear();
+
+                    // Clear ListBox only for the selected category
+                    listBoxshopping.Items.Clear();
+                    UpdateCounter();
+                }
+            
         }
 
         private void savebutton_Click(object sender, EventArgs e)
         {
             using (StreamWriter writer = new StreamWriter("ShoppingList.txt"))
             {
-                foreach (var item in listBoxshopping.Items)
+                foreach (var category in categoryItems.Keys)
                 {
-                    writer.WriteLine(item.ToString());
+                    writer.WriteLine($"[{category}]"); // Write category header
+                    foreach (var item in categoryItems[category])
+                    {
+                        writer.WriteLine(item); // Write items under category
+                    }
+                    writer.WriteLine(); // Add spacing for readability
                 }
             }
-            MessageBox.Show("Shopping list saved to ShoppingList.txt which is found in the folder called debug");
+
+            MessageBox.Show("Shopping list saved successfully!", "Save Complete");
         }
 
-        private void Form1_Load_1(object sender, EventArgs e)
 
-        {
-            // Add categories to the ComboBox
-            comboboxcategory.Items.Add("Electronics");
-            comboboxcategory.Items.Add("Groceries");
-            comboboxcategory.Items.Add("Clothing");
-            comboboxcategory.Items.Add("Books");
 
-            listBoxshopping.ContextMenuStrip = contextMenuListBox;
 
-        }
+        // ----------------------------------------------------- STORING _________________________________======= ------ - -- 
+
 
         private void textBoxitem_TextChanged(object sender, EventArgs e)
         {
@@ -139,47 +215,86 @@ Text: Deep Brown (#4E4E4E)
         }
 
 
-        // How to the fuck my remove turn to  editToolStripMenuItemToolStripMenuItem_Click
+        // How to the f*ck my remove turn to  editToolStripMenuItemToolStripMenuItem_Click
         private void editToolStripMenuItemToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if (listBoxshopping.SelectedItem != null)
+            if (comboboxcategory.SelectedItem == null)
             {
-                listBoxshopping.Items.Remove(listBoxshopping.SelectedItem);
-                UpdateCounter(); // Update item count
+                MessageBox.Show("Please select a category first.", "Error");
+                return;
             }
-            else
+
+            if (listBoxshopping.SelectedItem == null)
             {
                 MessageBox.Show("Please select an item to remove.", "Error");
+                return;
+            }
+
+            string category = comboboxcategory.SelectedItem.ToString();
+            string selectedItem = listBoxshopping.SelectedItem.ToString();
+
+            // Confirm removal
+            DialogResult result = MessageBox.Show($"Are you sure you want to remove '{selectedItem}' from {category}?",
+                                                  "Confirm Removal", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.Yes)
+            {
+                if (categoryItems.ContainsKey(category) && categoryItems[category].Contains(selectedItem))
+                {
+                    categoryItems[category].Remove(selectedItem); // Remove from storage
+                    listBoxshopping.Items.Remove(selectedItem); // Remove from ListBox
+                    UpdateCounter();
+                }
             }
 
         }
 
 
-        // How to the fuck my edit turn to  editToolStripMenuItemToolStripMenuItem1_Click
+        // How to the f*ck my edit turn to  editToolStripMenuItemToolStripMenuItem1_Click
 
         private void editToolStripMenuItemToolStripMenuItem1_Click(object sender, EventArgs e)
         {
 
-            if (listBoxshopping.SelectedItem != null)
+            if (comboboxcategory.SelectedItem == null)
             {
-                // Prompt user to enter a new name
-                string newItem = Microsoft.VisualBasic.Interaction.InputBox(
-                    "Edit item:", "Edit Item", listBoxshopping.SelectedItem.ToString());
+                MessageBox.Show("Please select a category first.", "Error");
+                return;
+            }
 
-                // Ensure the user didn't leave it empty
-                if (!string.IsNullOrWhiteSpace(newItem))
+            if (listBoxshopping.SelectedItem == null)
+            {
+                MessageBox.Show("Please select an item to edit.", "Error");
+                return;
+            }
+
+            string category = comboboxcategory.SelectedItem.ToString();
+            string selectedItem = listBoxshopping.SelectedItem.ToString();
+
+            // Prompt user for new item name
+            string newItem = Microsoft.VisualBasic.Interaction.InputBox(
+                $"Edit '{selectedItem}' in {category}:", "Edit Item", selectedItem);
+
+            // Ensure the user entered a valid item name
+            if (!string.IsNullOrWhiteSpace(newItem))
+            {
+                // Check if category exists and update item
+                if (categoryItems.ContainsKey(category) && categoryItems[category].Contains(selectedItem))
                 {
-                    int selectedIndex = listBoxshopping.SelectedIndex;
-                    listBoxshopping.Items[selectedIndex] = newItem;
+                    int index = categoryItems[category].IndexOf(selectedItem);
+                    categoryItems[category][index] = newItem; // Update stored list
 
+                    // Refresh ListBox
+                    listBoxshopping.Items.Clear();
+                    listBoxshopping.Items.AddRange(categoryItems[category].ToArray());
+
+                    UpdateCounter();
                 }
             }
             else
             {
-                MessageBox.Show("Please select an item to edit.", "Error");
+                MessageBox.Show("Invalid item name. No changes were made.", "Error");
             }
-
 
         }
 
@@ -192,13 +307,25 @@ Text: Deep Brown (#4E4E4E)
             this.WindowState = FormWindowState.Minimized;
         }
 
+        // text box 1 is the search --------------------------------------------- textchange1
+
         private void textBox1_TextChanged_1(object sender, EventArgs e)
         {
-            string searchText = textBox1.Text.ToLower();
+            if (comboboxcategory.SelectedItem == null)
+            {
+                MessageBox.Show("Please select a category first.", "Error");
+                return;
+            }
 
-            // Filter list items based on category or item name
-            var filteredItems = shoppingItems
-                .Where(item => item.ToLower().Contains(searchText))
+            string searchText = textBox1.Text.ToLower();
+            string category = comboboxcategory.SelectedItem.ToString();
+
+            // Ensure the selected category has items stored
+            if (!categoryItems.ContainsKey(category)) return;
+
+            // Filter items that start with the search text
+            var filteredItems = categoryItems[category]
+                .Where(item => item.ToLower().StartsWith(searchText)) // Search only at the beginning
                 .ToList();
 
             // Update ListBox with filtered results
@@ -219,6 +346,39 @@ Text: Deep Brown (#4E4E4E)
             if (result == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void LOADButton_Click(object sender, EventArgs e)
+        {
+            if (File.Exists("ShoppingList.txt"))
+            {
+                categoryItems.Clear(); // Clear current dictionary
+                listBoxshopping.Items.Clear();
+
+                string currentCategory = null;
+
+                foreach (string line in File.ReadAllLines("ShoppingList.txt"))
+                {
+                    if (line.StartsWith("[") && line.EndsWith("]"))
+                    {
+                        currentCategory = line.Trim('[', ']'); // Extract category name
+                        if (!categoryItems.ContainsKey(currentCategory))
+                        {
+                            categoryItems[currentCategory] = new List<string>();
+                        }
+                    }
+                    else if (!string.IsNullOrWhiteSpace(line) && currentCategory != null)
+                    {
+                        categoryItems[currentCategory].Add(line);
+                    }
+                }
+
+                MessageBox.Show("Shopping list loaded successfully!", "Load Complete");
+            }
+            else
+            {
+                MessageBox.Show("No saved shopping list found.", "Load Failed");
             }
         }
     }

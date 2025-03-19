@@ -1,7 +1,13 @@
-savv
-sdvs
-sdvsd
-dgbd
-sdvds
-dsvsv
-acsa
+[Electronics]
+guns
+grenades
+
+[Groceries]
+
+[Clothing]
+
+[Books]
+arieal
+bible
+artof war
+
