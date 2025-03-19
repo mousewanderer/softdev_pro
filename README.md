@@ -32,3 +32,10 @@ Operations
 
 ![Screenshot 2025-03-17 212529](https://github.com/user-attachments/assets/99a725e4-515a-4648-926a-3a2fe553d8a7)
 
+
+MID TERMS SCREWED ME NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+
+![Screenshot 2025-03-19 193606](https://github.com/user-attachments/assets/979a655b-a745-4d71-8aba-093416bb7df9)
+
+
+
