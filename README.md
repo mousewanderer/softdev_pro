@@ -33,9 +33,12 @@ Operations
 ![Screenshot 2025-03-17 212529](https://github.com/user-attachments/assets/99a725e4-515a-4648-926a-3a2fe553d8a7)
 
 
-MID TERMS SCREWED ME NOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO'
+## A Shopping List created with [Nhell](https://github.com/nhelll)
 
 ![Screenshot 2025-03-19 193606](https://github.com/user-attachments/assets/979a655b-a745-4d71-8aba-093416bb7df9)
 
+![Screenshot 2025-03-23 120613](https://github.com/user-attachments/assets/7542a993-ca71-4193-9721-0d2ec172519a)
+
+![Screenshot 2025-03-23 120543](https://github.com/user-attachments/assets/425b02ab-75a2-4451-b3b7-06c7da52669d)
 
 
