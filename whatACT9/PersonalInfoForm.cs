@@ -24,7 +24,7 @@ namespace whatACT9
             InitializeComponent();
         }
 
-
+        bool allowed = true;
 
 
 
@@ -101,37 +101,55 @@ namespace whatACT9
 
 
             // Age logic as requested - show age-related warning messages using MessageBox
-            if (age >= 18)
+            if (age >= 60)
             {
-                if (age >= 60)
+                if (age >= 150)
                 {
-                    MessageBox.Show($"{fullName}, You eligible for senior citizen discount! (-20%)", "Age Status");
+                    MessageBox.Show($"{fullName}, You are an elder Gods (-100%) discount don't destroy me");
+                    allowed = false;
+                    textBoxAge.Text = "";
                 }
                 else
                 {
+                    MessageBox.Show($"{fullName}, You eligible for senior citizen discount! (-20%)", "Age Status");
+                    allowed = true;
 
                 }
             }
-            else if (age < 0)
+            else if (age <= 0)
             {
                 MessageBox.Show($"{fullName}, You don't exist so you are cannot order!", "Age Status");
+                allowed = false;
+                textBoxAge.Text = "";
             }
             else
             {
-                MessageBox.Show($"{fullName}, You are eligible for Kid's Discount! (-20%)", "Age Status");
+
+                if (age <= 18)
+                {
+                    MessageBox.Show($"{fullName}, You are eligible for Kid's Discount! (-20%)", "Age Status");
+                    allowed = true;
+                }
+                else
+                {
+                    
+
+                }
             }
 
 
-
-
-            // Save to file (using the class-level filePath)
-            File.WriteAllText(filePath, $"{fullName}|{age}|{gender}");
+            if (allowed)
+            {
+                // Save to file (using the class-level filePath)
+                File.WriteAllText(filePath, $"{fullName}|{age}|{gender}");
+                MessageBox.Show(
+               $"Profile Saved!\n\nFull Name: {fullName}\nAge: {age}\nGender: {gender}",
+               "Profile Information"
+           );
+            }
 
             // Show confirmation message
-            MessageBox.Show(
-                $"Profile Saved!\n\nFull Name: {fullName}\nAge: {age}\nGender: {gender}",
-                "Profile Information"
-            );
+           
         }
 
 
@@ -146,6 +164,12 @@ namespace whatACT9
 
         private void textBoxAge_TextChanged(object sender, EventArgs e)
         {
+
+            if (!int.TryParse(textBoxAge.Text, out int age))
+            {
+                textBoxAge.Text = "";
+                return;
+            }
 
         }
 
