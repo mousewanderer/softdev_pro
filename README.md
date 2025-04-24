@@ -55,4 +55,10 @@ Operations
 ![Screenshot 2025-04-13 225501](https://github.com/user-attachments/assets/07ca52c9-2b74-4933-a260-fddc33831572)
 
 
+## Update System using SQL
 
+
+![Screenshot 2025-04-24 220952](https://github.com/user-attachments/assets/8be592e4-0fa9-4ac1-97a4-f5204b7e26b4)
+
+
+![Screenshot 2025-04-24 220937](https://github.com/user-attachments/assets/b6a18962-73b5-4030-8ea4-576702d36efa)
