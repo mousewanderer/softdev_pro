@@ -134,10 +134,10 @@
             dataGridViewStudents.BackgroundColor = Color.FromArgb(167, 211, 245);
             dataGridViewStudents.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewStudents.GridColor = Color.FromArgb(59, 95, 138);
-            dataGridViewStudents.Location = new Point(431, 45);
+            dataGridViewStudents.Location = new Point(431, 55);
             dataGridViewStudents.Name = "dataGridViewStudents";
             dataGridViewStudents.RowHeadersWidth = 51;
-            dataGridViewStudents.Size = new Size(529, 399);
+            dataGridViewStudents.Size = new Size(522, 389);
             dataGridViewStudents.TabIndex = 6;
             dataGridViewStudents.CellContentClick += dataGridViewStudents_CellContentClick;
             // 
@@ -159,7 +159,7 @@
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Location = new Point(378, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(642, 490);
+            pictureBox1.Size = new Size(627, 502);
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 

@@ -18,7 +18,7 @@ namespace EXP11
 
 
 
-        string connectionString = "Server=ASUS_2023;Database=StudentDB;Trusted_Connection=True;";
+        string connectionString = "Server=(INSERT SMSS) DATABASE";
 
 
 
@@ -60,6 +60,7 @@ namespace EXP11
             CourseBox.Items.Add("Mechanical Engineering");
             CourseBox.Items.Add("Criminology");
             CourseBox.Items.Add("Software Engineering");
+            CourseBox.Items.Add("Tourism Management");
 
         }
 
