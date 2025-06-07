@@ -1,8 +1,4 @@
 # softdev_pro
-from my subject software development
-
-
-created with @nhell
 
 ## AGE CHECKER and BACKGROUND COLOR CHANGER   created with [Nhell](https://github.com/nhelll)
 When Runed
